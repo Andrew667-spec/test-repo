@@ -1,6 +1,6 @@
 function Words() {
   const words = [
-    "Xylophone ",
+    "Xylophone",
     "Sunshine",
     "Mystery",
     "Banana",
