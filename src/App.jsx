@@ -4,7 +4,7 @@ import Words from "./assets/Words";
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
-  
+
   const words = useMemo(() => Words(), []);
   const currentWord = words[currentIndex];
 
@@ -16,12 +16,13 @@ function App() {
     );
   });
 
-  const handleInput=(e)=>{
-    if(e.key === " "){
-      setCurrentIndex(prev => prev+1)
-      setUserInput("")
+  const handleInput = (e) => {
+    if (e.key === " ") {
+    e.preventDefault();
+      setCurrentIndex((prev) => prev + 1);
+      setUserInput("");
     }
-  }
+  };
   console.log(currentWord);
   console.log(userInput);
   return (
@@ -40,7 +41,16 @@ function App() {
         onKeyDown={handleInput}
       />
       <div className="flex justify-center items-center h-screen w-full">
-        <h1 className="text-white text-4xl gap-10 ">{sortedWords}</h1>
+        <h1 className="text-white text-4xl gap-10 ">
+          {currentWord.split("").map((char, index)=>{
+            let colorClass = "text-gray-500"
+
+            if(index< userInput.length){
+              colorClass= userInput[index] ===char? "text-gray-200" : "text-red-500"
+            }
+            return <span key={index} className={colorClass}>{char}</span>
+          })}
+        </h1>
       </div>
     </>
   );
